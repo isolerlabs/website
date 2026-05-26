@@ -224,11 +224,19 @@
     }
 
     .app-card {
+      display: block;
       background: rgba(255,255,255,0.09);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 24px;
       padding: 18px;
       margin-bottom: 14px;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(124,92,255,0.45);
+      background: rgba(255,255,255,0.13);
     }
 
     .app-card strong { display: block; font-size: 18px; margin-bottom: 4px; }
@@ -293,7 +301,7 @@
         <span>Isoler Labs</span>
       </a>
       <div class="nav-links">
-        <a href="#apps">Apps</a>
+        <a href="/apps.html">Apps</a>
         <a href="#studio">Studio</a>
         <a href="#support">Support</a>
       </div>
@@ -306,7 +314,7 @@
       <h1><span class="gradient-text">Simple apps.</span><br />Built beautifully.</h1>
       <p>We design clean, focused and privacy-friendly apps that help people cook, plan, organize and enjoy daily life with less friction.</p>
       <div class="actions">
-        <a class="button primary" href="#apps">Explore Apps</a>
+        <a class="button primary" href="/apps.html">Explore Apps</a>
         <a class="button secondary" href="mailto:hello@isolerlabs.com">Contact</a>
       </div>
     </section>
@@ -339,15 +347,15 @@
         <p class="section-lead">From recipe collections to productivity tools, each app is created to solve a clear problem with a smooth user experience.</p>
         <div class="actions" style="justify-content:flex-start">
           <a class="button primary" href="/support.html">Get Support</a>
-          <a class="button secondary" href="/privacy.html">Privacy Policy</a>
+          <a class="button secondary" href="/apps/recipes/privacy.html">Recipes Privacy Policy</a>
         </div>
       </div>
       <div class="phone" aria-label="App preview mockup">
         <div class="phone-screen">
-          <div class="app-card">
-            <strong>Recipe App</strong>
+          <a class="app-card" href="/apps/recipes/index.html">
+            <strong>Recipes</strong>
             <span>Simple recipes, favorites and step-by-step cooking.</span>
-          </div>
+          </a>
           <div class="app-card">
             <strong>Meal Ideas</strong>
             <span>Quick inspiration for breakfast, dinner and weekend cooking.</span>
