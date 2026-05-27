@@ -43,8 +43,7 @@
     .field { margin-bottom: 20px; }
     .field label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
     .field input,
-    .field textarea,
-    .field select {
+    .field textarea {
       width: 100%;
       background: rgba(255,255,255,0.06);
       border: 1px solid var(--card-border);
@@ -57,13 +56,60 @@
       outline: none;
       appearance: none;
     }
-    .field select { color-scheme: dark; }
-    .field select option { background: #0f1020; color: var(--text); }
     .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
+    .field textarea:focus {
       border-color: var(--accent);
       background: rgba(255,255,255,0.09);
+    }
+    .custom-select { position: relative; }
+    .custom-select-btn {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 16px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color .2s ease, background .2s ease;
+      outline: none;
+    }
+    .custom-select-btn:focus,
+    .custom-select-btn[aria-expanded="true"] {
+      border-color: var(--accent);
+      background: rgba(255,255,255,0.09);
+    }
+    .custom-select-list {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: #111227;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      list-style: none;
+      margin: 0;
+      padding: 6px;
+      z-index: 100;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .custom-select-list li {
+      padding: 11px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 15px;
+      transition: background .15s ease, color .15s ease;
+    }
+    .custom-select-list li:hover,
+    .custom-select-list li[aria-selected="true"] {
+      background: rgba(124,92,255,0.18);
+      color: var(--text);
     }
     .field textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -163,13 +209,20 @@
           </div>
 
           <div class="field">
-            <label for="topic">Topic</label>
-            <select id="topic" name="topic">
-              <option value="General">General enquiry</option>
-              <option value="App support">App support</option>
-              <option value="Privacy request">Privacy request</option>
-              <option value="Other">Other</option>
-            </select>
+            <label id="topic-label">Topic</label>
+            <div class="custom-select" id="topic-select">
+              <button type="button" class="custom-select-btn" aria-haspopup="listbox" aria-labelledby="topic-label" aria-expanded="false">
+                <span class="custom-select-value">General enquiry</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <ul class="custom-select-list" role="listbox" aria-labelledby="topic-label" hidden>
+                <li role="option" aria-selected="true" data-value="General">General enquiry</li>
+                <li role="option" data-value="App support">App support</li>
+                <li role="option" data-value="Privacy request">Privacy request</li>
+                <li role="option" data-value="Other">Other</li>
+              </ul>
+              <input type="hidden" name="topic" value="General" />
+            </div>
           </div>
 
           <div class="field">
@@ -200,6 +253,37 @@
 
   <script src="/main.js"></script>
   <script>
+    (function () {
+      const wrap = document.getElementById('topic-select');
+      const btn = wrap.querySelector('.custom-select-btn');
+      const list = wrap.querySelector('.custom-select-list');
+      const hidden = wrap.querySelector('input[type="hidden"]');
+      const valueEl = wrap.querySelector('.custom-select-value');
+
+      function openList() { list.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
+      function closeList() { list.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+
+      btn.addEventListener('click', function (e) { e.stopPropagation(); list.hidden ? openList() : closeList(); });
+
+      list.addEventListener('click', function (e) {
+        const li = e.target.closest('li');
+        if (!li) return;
+        wrap.querySelectorAll('li').forEach(function (el) { el.removeAttribute('aria-selected'); });
+        li.setAttribute('aria-selected', 'true');
+        valueEl.textContent = li.textContent;
+        hidden.value = li.dataset.value;
+        closeList();
+        btn.focus();
+      });
+
+      btn.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); list.hidden ? openList() : closeList(); }
+        if (e.key === 'Escape') { closeList(); }
+      });
+
+      document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) closeList(); });
+    })();
+
     document.getElementById('contact-form').addEventListener('submit', async function (e) {
       e.preventDefault();
       const btn = this.querySelector('button[type="submit"]');
