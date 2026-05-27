@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Isoler Labs</title>
+  <meta name="description" content="Get in touch with Isoler Labs for support, feedback or general questions." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.isolerlabs.com/contact.html" />
+  <meta property="og:title" content="Contact | Isoler Labs" />
+  <meta property="og:description" content="Get in touch with Isoler Labs for support, feedback or general questions." />
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 32px;
+      align-items: start;
+      margin-bottom: 70px;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 18px; }
+    .info-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.045));
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .info-card .icon { margin-bottom: 12px; width: 42px; height: 42px; font-size: 20px; }
+    .info-card h3 { margin: 0 0 6px; font-size: 16px; letter-spacing: -0.02em; }
+    .info-card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .info-card a { color: var(--accent-2); }
+
+    .form-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.045));
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 34px;
+    }
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 16px;
+      transition: border-color .2s ease, background .2s ease;
+      outline: none;
+      appearance: none;
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: var(--accent);
+      background: rgba(255,255,255,0.09);
+    }
+    .field textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    #form-result {
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    #form-result.success {
+      background: rgba(74,222,128,0.12);
+      border: 1px solid rgba(74,222,128,0.3);
+      color: #4ade80;
+    }
+    #form-result.error {
+      background: rgba(248,113,113,0.12);
+      border: 1px solid rgba(248,113,113,0.3);
+      color: #f87171;
+    }
+
+    @media (max-width: 820px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="/" class="logo" aria-label="Isoler Labs home">
+        <span class="logo-mark"></span>
+        <span>Isoler Labs</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+        <a href="/apps.html">Apps</a>
+        <a href="/#studio">Studio</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/support.html">Support</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="badge">Contact</div>
+      <h1>Get in touch.</h1>
+      <p class="lead">Questions, feedback or support — we're happy to help.</p>
+    </section>
+
+    <section class="contact-layout">
+      <div class="contact-info">
+        <div class="info-card">
+          <div class="icon">💬</div>
+          <h3>General enquiries</h3>
+          <p>Questions about Isoler Labs, our apps or partnerships.</p>
+        </div>
+        <div class="info-card">
+          <div class="icon">🛠️</div>
+          <h3>App support</h3>
+          <p>Include your device model and iOS version so we can help faster.</p>
+        </div>
+        <div class="info-card">
+          <div class="icon">🔒</div>
+          <h3>Privacy requests</h3>
+          <p>Data access, correction or deletion requests. See our <a href="/privacy.html">privacy page</a>.</p>
+        </div>
+        <div class="info-card">
+          <div class="icon">📧</div>
+          <h3>Direct email</h3>
+          <p><a href="mailto:isolerlabs@gmail.com">isolerlabs@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form id="contact-form" novalidate>
+          <!-- Web3Forms access key — replace with your key from web3forms.com -->
+          <input type="hidden" name="access_key" value="b0a2a686-37c9-422b-b454-81e9ad7a58cc" />
+          <input type="hidden" name="subject" value="New message from isolerlabs.com" />
+          <input type="hidden" name="from_name" value="Isoler Labs Contact Form" />
+          <!-- Honeypot spam protection -->
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="topic">Topic</label>
+            <select id="topic" name="topic">
+              <option value="General">General enquiry</option>
+              <option value="App support">App support</option>
+              <option value="Privacy request">Privacy request</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+          </div>
+
+          <button type="submit" class="button primary" style="width:100%; justify-content:center;">
+            Send message
+          </button>
+
+          <div id="form-result" hidden></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div class="footer-inner">
+      <span>© 2026 Isoler Labs. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/support.html">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/main.js"></script>
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      const result = document.getElementById('form-result');
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(this)))
+        });
+        const json = await res.json();
+
+        if (json.success) {
+          result.textContent = 'Message sent! We\'ll get back to you soon.';
+          result.className = 'success';
+          this.reset();
+        } else {
+          throw new Error(json.message);
+        }
+      } catch {
+        result.textContent = 'Something went wrong. Please email us at isolerlabs@gmail.com';
+        result.className = 'error';
+      }
+
+      result.hidden = false;
+      btn.disabled = false;
+      btn.textContent = 'Send message';
+    });
+  </script>
+</body>
+</html>

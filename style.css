@@ -9,6 +9,8 @@
   --radius: 28px;
 }
 
+html { scroll-behavior: smooth; }
+
 * { box-sizing: border-box; }
 
 body {
@@ -49,6 +51,7 @@ nav { display: flex; justify-content: space-between; align-items: center; gap: 2
 }
 
 .nav-links { display: flex; gap: 22px; color: var(--muted); font-size: 14px; }
+.nav-links a.active { color: var(--text); }
 
 .nav-toggle {
   display: none;
